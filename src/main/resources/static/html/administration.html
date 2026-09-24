@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="admin.pageTitle">Administration</title>
+    <link rel="stylesheet" href="/css/administration.css">
+    <link rel="stylesheet" href="/css/theme.css">
+</head>
+<body>
+
+<header class="header-class">
+    <h1>Hardware Hub</h1>
+</header>
+
+<nav class="navigationBar">
+    <ul id="navList"></ul>
+</nav>
+
+<main class="admin-panel">
+    <div style="display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap;">
+        <h2 data-i18n="admin.panelTitle">Administration Panel</h2>
+
+        <div class="language-switcher">
+            <span id="languageLabel">Language</span>
+            <button type="button" id="langHrBtn" onclick="setLanguage('hr')">HR</button>
+            <button type="button" id="langEnBtn" onclick="setLanguage('en')">EN</button>
+        </div>
+    </div>
+
+    <section class="admin-section">
+        <h3 data-i18n="admin.settingsManagement">Application settings</h3>
+
+        <form id="settingsForm" class="admin-form">
+            <div class="form-grid">
+                <label>
+                    <span data-i18n="admin.settingsLanguage">Default language</span>
+                    <select id="settingsLanguage">
+                        <option value="en">English</option>
+                        <option value="hr">Hrvatski</option>
+                    </select>
+                </label>
+
+                <label>
+                    <span data-i18n="admin.settingsItemsPerPage">Products per page</span>
+                    <input type="number" id="settingsItemsPerPage" min="4" max="50">
+                </label>
+            </div>
+
+            <button type="submit" data-i18n="admin.saveSettings">Save settings</button>
+        </form>
+    </section>
+
+    <section class="admin-section">
+        <h3 data-i18n="admin.systemToolsTitle">System maintenance & security</h3>
+        <p class="section-description" data-i18n="admin.systemToolsDescription">
+            Tools for maintaining inventory files, securing activity logs, checking file integrity and running system analysis.
+        </p>
+
+        <div class="tool-grid">
+            <div class="tool-card">
+                <h4 data-i18n="admin.activityLogsTitle">Audit activity</h4>
+                <p data-i18n="admin.activityLogsDescription">
+                    Review recent and archived security-relevant activity. Logs are encrypted and archived automatically in the background.
+                </p>
+
+                <div class="admin-tool-group">
+                    <strong>Recent activity</strong>
+                    <small>Shows current encrypted activity logs after temporary in-memory decryption.</small>
+                    <button type="button" onclick="loadRecentActivityLogs()" data-i18n="admin.loadRecentActivityLogs">
+                        Check recent activity
+                    </button>
+                </div>
+
+                <div class="admin-tool-group">
+                    <strong>Archived activity</strong>
+                    <small>Shows older activity logs grouped by archive date.</small>
+                    <button type="button" onclick="loadArchivedActivityLogs()" data-i18n="admin.loadArchivedActivityLogs">
+                        Check archived activity
+                    </button>
+                </div>
+
+                <div class="admin-tool-group">
+                    <strong>Audit integrity</strong>
+                    <small>Verifies SHA-256 hashes of current and archived encrypted log files.</small>
+                    <button type="button" onclick="verifyAuditIntegrity()" data-i18n="admin.verifyAuditIntegrity">
+                        Verify audit integrity
+                    </button>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <h4 data-i18n="admin.stockXmlTitle">Inventory XML snapshot</h4>
+                <p data-i18n="admin.stockXmlDescription">
+                    Review the latest product stock snapshot stored in XML format.
+                </p>
+
+                <div class="admin-tool-group">
+                    <strong>Inventory snapshot</strong>
+                    <small>
+                        Refreshes the XML snapshot from the current database state and displays it in a structured view.
+                    </small>
+                    <button type="button" onclick="loadInventorySnapshot()" data-i18n="admin.loadInventorySnapshot">
+                        View inventory snapshot
+                    </button>
+                </div>
+
+                <div class="admin-tool-group">
+                    <strong>Snapshot integrity</strong>
+                    <small>
+                        Verifies whether the generated XML snapshot file was modified after creation.
+                    </small>
+                    <button type="button" onclick="verifyInventorySnapshotIntegrity()" data-i18n="admin.verifyInventorySnapshotIntegrity">
+                        Verify snapshot integrity
+                    </button>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <h4 data-i18n="admin.binaryBackupTitle">Order binary archive</h4>
+                <p data-i18n="admin.binaryBackupDescription">
+                    Completed and cancelled orders are automatically stored in daily binary archive files.
+                </p>
+
+                <<div class="admin-tool-group">
+                <strong>Archived orders</strong>
+
+                <small>
+                    Reads daily binary archive files and displays completed or cancelled orders.
+                </small>
+
+                <button
+                        type="button"
+                        onclick="loadBinaryOrderArchive()"
+                        data-i18n="admin.readBinaryBackup">
+                    View archived orders
+                </button>
+
+                <button
+                        type="button"
+                        onclick="viewSignatureVerificationReport()">
+                    View verification report
+                </button>
+
+                <button
+                        type="button"
+                        onclick="deleteSignatureVerificationReport()">
+                    Delete verification report
+                </button>
+
+            </div>
+            </div>
+
+            <div class="tool-card">
+                <h4 data-i18n="admin.externalRestTitle">External REST service</h4>
+                <p data-i18n="admin.externalRestDescription">
+                    Fetch the latest EUR to USD exchange rate from an external REST API.
+                </p>
+
+                <div class="admin-tool-group">
+                    <strong>Tečaj</strong>
+                    <small>Dohvaća EUR/USD tečaj iz vanjskog REST servisa.</small>
+                    <button type="button" onclick="loadExchangeRate()" data-i18n="admin.loadExchangeRate">
+                        Load EUR/USD rate
+                    </button>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <h4>System analysis</h4>
+                <p>
+                    Runs parallel system analysis tasks and writes results to a shared file using ReentrantLock.
+                </p>
+
+                <div class="admin-tool-group">
+                    <strong>Parallel analysis</strong>
+                    <small>
+                        Three Thread Pool tasks analyze users, products and orders, then write to analysis-results.txt.
+                    </small>
+                    <button type="button" onclick="runSystemAnalysis()">
+                        Run system analysis
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="tool-output">
+            <h4 data-i18n="admin.toolOutputTitle">Output</h4>
+            <div id="systemToolsOutput" class="system-tools-output">
+                <div class="tool-empty-message">Nema rezultata. Pokreni jednu od opcija iznad.</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="admin-section">
+        <h3 data-i18n="admin.userManagement">User management</h3>
+
+        <div class="controls">
+            <input
+                    type="text"
+                    id="searchInput"
+                    data-i18n-placeholder="admin.searchUsersPlaceholder"
+                    placeholder="Search users by username or email"
+            >
+
+            <select id="roleFilter">
+                <option value="" data-i18n="admin.allRoles">All roles</option>
+                <option value="ADMIN" data-i18n="admin.adminRole">Admin</option>
+                <option value="CUSTOMER" data-i18n="admin.customerRole">Customer</option>
+            </select>
+        </div>
+
+        <table id="userTable">
+            <thead>
+            <tr>
+                <th data-i18n="admin.userTable.id">ID</th>
+                <th data-i18n="admin.userTable.username">Username</th>
+                <th data-i18n="admin.userTable.email">Email</th>
+                <th data-i18n="admin.userTable.role">Role</th>
+                <th data-i18n="admin.userTable.changeRole">Change role</th>
+                <th data-i18n="admin.userTable.actions">Actions</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </section>
+
+    <section class="admin-section">
+        <h3 data-i18n="admin.orderManagement">Order management</h3>
+
+        <table id="orderTable">
+            <thead>
+            <tr>
+                <th data-i18n="admin.orderTable.id">ID</th>
+                <th data-i18n="admin.orderTable.user">User</th>
+                <th data-i18n="admin.orderTable.email">Email</th>
+                <th data-i18n="admin.orderTable.date">Date</th>
+                <th data-i18n="admin.orderTable.status">Status</th>
+                <th data-i18n="admin.orderTable.total">Total</th>
+
+                <th>Signature</th>
+
+                <th data-i18n="admin.orderTable.changeStatus">Change status</th>
+
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </section>
+
+    <section class="admin-section">
+        <h3 data-i18n="admin.categoryManagement">Category management</h3>
+
+        <form id="categoryForm" class="admin-form">
+            <input type="hidden" id="editingCategoryId">
+
+            <input
+                    type="text"
+                    id="categoryName"
+                    data-i18n-placeholder="admin.categoryNamePlaceholder"
+                    placeholder="Category name"
+                    required
+            >
+
+            <button type="submit" id="categorySubmitButton" data-i18n="admin.addCategory">Add category</button>
+            <button
+                    type="button"
+                    id="cancelCategoryEditButton"
+                    style="display:none;"
+                    onclick="cancelCategoryEdit()"
+                    data-i18n="admin.cancelCategoryEdit"
+            >
+                Cancel edit
+            </button>
+        </form>
+
+        <table id="categoryTable">
+            <thead>
+            <tr>
+                <th data-i18n="admin.categoryTable.id">ID</th>
+                <th data-i18n="admin.categoryTable.name">Name</th>
+                <th data-i18n="admin.categoryTable.actions">Actions</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </section>
+
+    <section class="admin-section">
+        <h3 data-i18n="admin.productManagement">Product management</h3>
+
+        <form id="productForm" class="admin-form" enctype="multipart/form-data">
+            <input type="hidden" id="productId">
+
+            <div class="form-grid">
+                <input
+                        type="text"
+                        id="productName"
+                        data-i18n-placeholder="admin.productNamePlaceholder"
+                        placeholder="Product name"
+                        required
+                >
+
+                <input
+                        type="text"
+                        id="productBrand"
+                        data-i18n-placeholder="admin.productBrandPlaceholder"
+                        placeholder="Brand"
+                        required
+                >
+
+                <select id="productCategory" required>
+                    <option value="" data-i18n="admin.selectCategory">Select category</option>
+                </select>
+
+                <input
+                        type="number"
+                        id="productPrice"
+                        data-i18n-placeholder="admin.productPricePlaceholder"
+                        placeholder="Price"
+                        step="0.01"
+                        min="0"
+                        required
+                >
+
+                <input
+                        type="number"
+                        id="productStock"
+                        data-i18n-placeholder="admin.productStockPlaceholder"
+                        placeholder="Stock"
+                        min="0"
+                        required
+                >
+
+                <input type="file" id="productImage" accept="image/*">
+            </div>
+
+            <textarea
+                    id="productDescription"
+                    data-i18n-placeholder="admin.productDescriptionPlaceholder"
+                    placeholder="Description"
+                    rows="4"
+            ></textarea>
+
+            <button type="submit" id="productSubmitButton" data-i18n="admin.addProduct">Add product</button>
+            <button
+                    type="button"
+                    id="cancelEditButton"
+                    style="display:none;"
+                    onclick="cancelEdit()"
+                    data-i18n="admin.cancelProductEdit"
+            >
+                Cancel edit
+            </button>
+        </form>
+
+        <table id="productTable">
+            <thead>
+            <tr>
+                <th data-i18n="admin.productTable.id">ID</th>
+                <th data-i18n="admin.productTable.name">Name</th>
+                <th data-i18n="admin.productTable.brand">Brand</th>
+                <th data-i18n="admin.productTable.category">Category</th>
+                <th data-i18n="admin.productTable.price">Price</th>
+                <th data-i18n="admin.productTable.stock">Stock</th>
+                <th data-i18n="admin.productTable.image">Image</th>
+                <th data-i18n="admin.productTable.actions">Actions</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </section>
+</main>
+
+<footer class="footer-class">
+    <p><b>&copy; Hardware Hub 2026 All rights reserved</b></p>
+</footer>
+
+<script src="/js/translations.js"></script>
+<script src="/js/i18n.js"></script>
+<script src="/js/theme.js"></script>
+<script src="/js/navbar.js"></script>
+<script src="/js/admin.js"></script>
+</body>
+</html>

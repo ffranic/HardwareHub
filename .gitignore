@@ -1,0 +1,64 @@
+HELP.md
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+### Hardware Hub generated files ###
+
+# Encrypted application logs
+logs/
+
+# Generated RSA keys / signatures
+order-signatures/
+
+# Secure log archives
+secure-log-archive/
+
+# Generated PDFs
+order-pdfs/
+order-pdf-batches/
+
+# Binary order archives
+order-archives/
+
+# Generated backup/export files
+stock-backup.bin
+product-stock.xml
+analysis-results.txt
+
+# OS files
+.DS_Store
+Thumbs.db

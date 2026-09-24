@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="signIn.pageTitle">Sign in</title>
+
+  <link rel="stylesheet" href="/css/signIn.css">
+  <link rel="stylesheet" href="/css/theme.css">
+</head>
+
+<body>
+
+<header class="header-class">
+  <h1>Hardware Hub</h1>
+</header>
+
+<nav class="navigationBar">
+  <ul id="navList"></ul>
+</nav>
+
+<h2 data-i18n="signIn.heading">Sign in</h2>
+
+<div class="signInMain">
+  <form id="signInForm">
+
+    <label for="username" data-i18n="signIn.usernameLabel">
+      Username:
+    </label>
+
+    <input type="text" id="username" name="username" required>
+    <br>
+
+    <label for="password" data-i18n="signIn.passwordLabel">
+      Password:
+    </label>
+
+    <input type="password" id="password" name="password" required>
+    <br>
+
+    <button type="submit" data-i18n="signIn.signInButton">
+      Sign in
+    </button>
+
+  </form>
+
+  <p>
+        <span data-i18n="signIn.noAccountText">
+            Don't have an account?
+        </span>
+
+    <a href="/html/registration.html">
+            <span data-i18n="signIn.registerText">
+                Register
+            </span>
+      <span data-i18n="signIn.hereText">
+                here.
+            </span>
+    </a>
+  </p>
+
+</div>
+
+<footer class="footer-class">
+  <p><b>&copy; Hardware Hub 2026 All rights reserved</b></p>
+</footer>
+
+<script src="/js/translations.js"></script>
+<script src="/js/i18n.js"></script>
+<script src="/js/theme.js"></script>
+<script src="/js/navbar.js"></script>
+<script src="/js/signIn.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Filip Franić">
+    <title data-i18n="registration.pageTitle">Registration</title>
+    <link rel="stylesheet" href="/css/registration.css">
+    <link rel="stylesheet" href="/css/theme.css">
+</head>
+
+<body>
+<header class="header-class">
+    <h1>Hardware Hub</h1>
+</header>
+
+<nav class="navigationBar">
+    <ul id="navList"></ul>
+</nav>
+
+<h2 data-i18n="registration.heading">Create an account</h2>
+
+<div class="registrationFormMain">
+    <form id="registrationForm">
+
+        <label for="email" data-i18n="registration.emailLabel">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <br/>
+
+        <label for="username" data-i18n="registration.usernameLabel">Username:</label>
+        <input
+                type="text"
+                id="username"
+                name="username"
+                data-i18n-placeholder="registration.usernamePlaceholder"
+                placeholder="Choose username"
+                required
+        >
+        <br/>
+
+        <label for="password" data-i18n="registration.passwordLabel">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <br/>
+
+        <button type="submit" data-i18n="registration.registerButton">Register</button>
+
+    </form>
+</div>
+
+<footer class="footer-class">
+    <p><b data-i18n="common.footer">&copy; Hardware Hub 2026 All rights reserved</b></p>
+</footer>
+
+<script src="/js/translations.js"></script>
+<script src="/js/i18n.js"></script>
+<script src="/js/theme.js"></script>
+<script src="/js/navbar.js"></script>
+<script src="/js/registration.js"></script>
+</body>
+</html>

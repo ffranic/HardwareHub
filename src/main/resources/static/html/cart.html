@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My cart</title>
+    <link rel="stylesheet" href="/css/cart.css">
+    <link rel="stylesheet" href="/css/theme.css">
+</head>
+<body>
+<header class="header-class">
+    <h1>Hardware Hub</h1>
+</header>
+
+<nav class="navigationBar">
+    <ul id="navList"></ul>
+</nav>
+
+<h2>My cart</h2>
+
+<div id="cart-items-container"></div>
+
+<div id="cart-summary">
+    <p id="cart-total">Total price: 0.00 EUR</p>
+    <button id="checkout-btn" onclick="proceedToCheckout()">Proceed to checkout</button>
+    <button onclick="window.location.href='/html/index.html'">Continue shopping</button>
+</div>
+
+<footer class="footer-class">
+    <p><b>&copy; Hardware Hub 2026 All rights reserved</b></p>
+</footer>
+
+<script src="/js/translations.js"></script>
+<script src="/js/i18n.js"></script>
+<script src="/js/theme.js"></script>
+<script src="/js/navbar.js"></script>
+<script src="/js/cart.js"></script>
+</body>
+</html>

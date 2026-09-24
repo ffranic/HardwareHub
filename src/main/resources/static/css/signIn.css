@@ -1,0 +1,215 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    color: #333;
+}
+body h2 {
+    text-align: center;
+}
+.header-class, .footer-class {
+    background-color: #c00;
+    color: white;
+    padding: 25px 20px;
+    font-size: 20px;
+    text-align: center;
+}
+.navigationBar {
+    background-color: #000;
+    padding: 0;
+    width: 100%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.navigationBar ul {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0 24px;
+    max-width: 1200px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.navigationBar li {
+    display: flex;
+    align-items: center;
+}
+
+.navigationBar a {
+    color: white;
+    padding: 14px 18px;
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    border-radius: 8px;
+    transition: background-color 0.25s ease, color 0.25s ease, transform 0.15s ease;
+}
+
+.navigationBar a:hover {
+    background-color: #d71920;
+    color: white;
+    transform: translateY(-1px);
+}
+
+.nav-language-switcher {
+    margin-left: 12px;
+    padding: 8px 10px;
+    border-left: 1px solid rgba(255, 255, 255, 0.25);
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+}
+
+.nav-language-switcher span {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.nav-language-switcher button {
+    margin: 0;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    background-color: transparent;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: background-color 0.25s ease, border-color 0.25s ease, transform 0.15s ease;
+}
+
+.nav-language-switcher button:hover {
+    background-color: #d71920;
+    border-color: #d71920;
+    transform: translateY(-1px);
+}
+
+.nav-language-switcher button.active-lang {
+    background-color: #d71920;
+    border-color: #d71920;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .navigationBar ul {
+        padding: 8px 12px;
+        gap: 4px;
+    }
+
+    .navigationBar a {
+        padding: 10px 12px;
+        font-size: 0.95rem;
+    }
+
+    .nav-language-switcher {
+        width: 100%;
+        justify-content: center;
+        margin-left: 0;
+        border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.25);
+        padding-top: 10px;
+    }
+}
+form input, select {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 250px;
+    margin: 10px 0;
+}
+button {
+    margin: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
+}
+button:hover {
+    background-color: red;
+    color: white;
+}
+.signInMain {
+    text-align: center;
+}
+
+.signInMain a:link {
+    text-decoration: none;
+}
+
+@media (max-width: 600px) {
+    .signInMain form {
+        padding: 0 10px;
+    }
+
+    form label {
+        text-align: left;
+        margin-left: 0;
+        font-size: 14px;
+    }
+
+    form input[type="radio"] {
+        display: inline;
+    }
+
+    .signInMain label {
+        text-align: left;
+        padding-left: 5%;
+        margin-top: 10px;
+    }
+
+    .signInMain input {
+        width: 50%;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+    }
+
+    .signInMain button {
+        width: 50%;
+        padding: 10px;
+        font-size: 16px;
+        margin-top: 15px;
+    }
+
+    .signInMain p {
+        font-size: 14px;
+        padding: 0 10px;
+    }
+
+    #usernameLabel {
+        margin-left: -90px;
+    }
+
+    #passwordLabel {
+        margin-left: -85px;
+    }
+
+    .header-class, .footer-class {
+        font-size: 16px;
+        padding: 15px;
+    }
+
+    .navigationBar {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .navigationBar a {
+        padding: 10px;
+        display: block;
+    }
+}

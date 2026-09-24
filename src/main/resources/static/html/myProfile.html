@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Filip Franić">
+    <title data-i18n="profile.pageTitle">My profile</title>
+    <link rel="stylesheet" href="/css/myProfile.css">
+    <link rel="stylesheet" href="/css/theme.css">
+</head>
+<body>
+
+<header class="header-class">
+    <h1>Hardware Hub</h1>
+</header>
+
+<nav class="navigationBar">
+    <ul id="navList"></ul>
+</nav>
+
+<h2 data-i18n="profile.heading">My profile</h2>
+
+<main>
+    <div class="profile-container">
+
+        <section class="profile-section">
+            <div class="profile-info">
+                <p><strong data-i18n="profile.emailLabel">Email:</strong> <span id="emailDisplay"></span></p>
+                <p><strong data-i18n="profile.usernameLabel">Username:</strong> <span id="usernameDisplay"></span></p>
+                <p><strong data-i18n="profile.roleLabel">Role:</strong> <span id="roleDisplay"></span></p>
+                <button id="updateProfileButton" onclick="openModal()" data-i18n="profile.updateProfileButton">Update profile</button>
+            </div>
+        </section>
+
+        <section class="profile-section appearance-card">
+            <div class="appearance-header">
+                <div>
+                    <h3 data-i18n="profile.appearanceTitle">Appearance</h3>
+                    <p data-i18n="profile.appearanceDescription">
+                        Choose how the application looks on this device.
+                    </p>
+                </div>
+            </div>
+
+            <div class="theme-options">
+                <button type="button" id="lightThemeButton" onclick="selectUserTheme('light')">
+                    <span class="theme-icon">☀️</span>
+                    <span data-i18n="profile.lightTheme">Light</span>
+                </button>
+
+                <button type="button" id="darkThemeButton" onclick="selectUserTheme('dark')">
+                    <span class="theme-icon">🌙</span>
+                    <span data-i18n="profile.darkTheme">Dark</span>
+                </button>
+            </div>
+        </section>
+
+        <div id="updateProfileModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h3 data-i18n="profile.updateModalTitle">Update your profile</h3>
+
+                <form id="updateProfileForm">
+                    <label for="email" data-i18n="profile.emailLabel">Email:</label>
+                    <input type="email" id="email" name="email">
+                    <br/>
+
+                    <label for="username" data-i18n="profile.usernameLabel">Username:</label>
+                    <input type="text" id="username" name="username">
+                    <br/>
+
+                    <button type="button" onclick="updateProfile()" data-i18n="profile.saveChanges">Save changes</button>
+                </form>
+            </div>
+        </div>
+
+        <section class="profile-section">
+            <div class="password-update">
+                <h3 data-i18n="profile.changePasswordTitle">Change password</h3>
+
+                <form>
+                    <label for="newPassword" data-i18n="profile.newPasswordLabel">New password:</label>
+                    <input type="password" id="newPassword" required>
+                    <br/>
+
+                    <label for="confirmPassword" data-i18n="profile.confirmPasswordLabel">Confirm password:</label>
+                    <input type="password" id="confirmPassword" required>
+                    <br/>
+
+                    <button type="button" onclick="updatePassword()" data-i18n="profile.changePasswordButton">Change password</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="profile-section">
+            <div class="orders-section">
+                <h3 data-i18n="profile.myOrdersTitle">My orders</h3>
+                <div id="ordersContainer">
+                    <p data-i18n="profile.loadingOrders">Loading orders...</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="profile-section">
+            <div class="delete-account">
+                <button class="danger-button" onclick="deleteAccount()" data-i18n="profile.deleteAccountButton">Delete account</button>
+            </div>
+        </section>
+
+    </div>
+</main>
+
+<footer class="footer-class">
+    <p><b data-i18n="common.footer">&copy; Hardware Hub 2026 All rights reserved</b></p>
+</footer>
+
+<script src="/js/translations.js"></script>
+<script src="/js/i18n.js"></script>
+<script src="/js/theme.js"></script>
+<script src="/js/navbar.js"></script>
+<script src="/js/profile.js"></script>
+</body>
+</html>

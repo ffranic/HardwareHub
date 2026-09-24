@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Filip Franić">
+    <title>Hardware Hub</title>
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/theme.css">
+</head>
+
+<body>
+<header class="header-class">
+    <h1>Hardware Hub</h1>
+</header>
+
+<nav class="navigationBar">
+    <ul id="navList">
+
+    </ul>
+</nav>
+<script src="/js/translations.js"></script>
+<script src="/js/i18n.js"></script>
+<script src="/js/theme.js"></script>
+<script src="/js/navbar.js"></script>
+<h2 data-i18n="products.heading">Our products</h2>
+
+<section class="catalog-controls">
+    <input
+            type="text"
+            id="productSearch"
+            placeholder="Search products..."
+            data-i18n-placeholder="products.searchPlaceholder"
+    >
+
+    <select id="categoryFilter">
+        <option value="" data-i18n="products.allCategories">All categories</option>
+    </select>
+
+    <select id="stockFilter">
+        <option value="" data-i18n="products.allStock">All stock</option>
+        <option value="inStock" data-i18n="products.inStockOnly">In stock</option>
+        <option value="outOfStock" data-i18n="products.outOfStockOnly">Out of stock</option>
+    </select>
+
+    <select id="sortSelect">
+        <option value="default" data-i18n="products.sortDefault">Default sorting</option>
+        <option value="priceAsc" data-i18n="products.sortPriceAsc">Price: low to high</option>
+        <option value="priceDesc" data-i18n="products.sortPriceDesc">Price: high to low</option>
+        <option value="nameAsc" data-i18n="products.sortNameAsc">Name: A-Z</option>
+        <option value="nameDesc" data-i18n="products.sortNameDesc">Name: Z-A</option>
+        <option value="stockDesc" data-i18n="products.sortStockDesc">Stock: high to low</option>
+    </select>
+
+    <button type="button" id="clearFiltersButton" data-i18n="products.clearFilters">
+        Clear filters
+    </button>
+</section>
+
+<p id="productResultInfo" class="product-result-info"></p>
+
+<div class="main" id="main">
+
+</div>
+<div id="pagination" class="pagination"></div>
+
+<footer class="footer-class">
+    <p><b>&copy; HardwareHub 2026 All rights reserved</b></p>
+</footer>
+
+<script src="/js/products.js"></script>
+
+</body>
+</html>
